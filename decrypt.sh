@@ -1,6 +1,8 @@
 #!/bin/sh
 
-passwords="080035080035080035 Sz080035080035080035 SzSz080035080035080035 ß080035080035080035"
+passwords="080035080035080035 Sz080035080035080035 SzSz080035080035080035"
+passwords="$passwords $(echo "ß080035080035080035" | iconv -t iso-8859-1)"
+
 find . -iname '*.pdf' | while read pdf; do
   if qpdf --show-encryption "$pdf" 2>&1 | grep -q "not encrypted"; then
     continue;
